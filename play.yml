@@ -1,0 +1,17 @@
+---
+# tasks file for myrole
+- name: Install Mysql 5.7
+  apt:
+    name: mysql-server-5.7
+    state: present
+
+- name: Copy custom MySQL config file
+  copy:
+    src: custom_mysql_conf.cnf
+    dest: /etc/mysql/my.cnf
+  notify: Restart MySQL
+
+- name: Restart MySQL
+  service:
+    name: mysqld
+    state: restarted

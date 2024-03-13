@@ -1,0 +1,30 @@
+---
+- name: Add MySQL repository key
+  apt_key:
+    url: https://dev.mysql.com/doc/refman/5.7/en/checking-gpg-signature.html
+    state: present
+
+- name: Add MySQL APT repository
+  apt_repository:
+    repo: deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-apt-config
+    state: present
+
+- name: Update apt package cache
+  apt:
+    update_cache: yes
+
+- name: Install MySQL Server
+  apt:
+    name: mysql-server-5.7
+    state: present
+
+- name: Install MySQL client
+  apt:
+    name: mysql-client
+    state: present
+
+- name: Ensure MySQL service is running and enabled
+  service:
+    name: mysql
+    state: started
+    enabled: yes

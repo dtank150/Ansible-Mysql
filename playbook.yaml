@@ -1,0 +1,7 @@
+---
+- name: "Install Mysql"
+  hosts: web
+  become: true
+  become_method: sudo
+  roles:
+    - myrole
